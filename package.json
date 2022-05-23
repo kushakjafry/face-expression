@@ -11,7 +11,6 @@
     "@0xalter/alter-core": "^0.13.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-image-select": "^1.0.1",
     "vite-plugin-static-copy": "^0.5.0"
   },
   "devDependencies": {
