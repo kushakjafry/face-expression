@@ -87,7 +87,8 @@
       {
         "name": "accessories/tongue/acs_tongue_a_01"
       }
-    ]
+    ],
+    "imgLink": "/avatars/avatar1.png"
   },
   {
     "items": [
@@ -131,7 +132,8 @@
       {
         "name": "accessories/ears/acs_ears_e_10"
       }
-    ]
+    ],
+    "imgLink": "/avatars/avatar2.png"
   },
   {
     "items": [
@@ -220,7 +222,8 @@
       {
         "name": "addons/add_b_04"
       }
-    ]
+    ],
+    "imgLink": "/avatars/avatar3.png"
   },
   {
     "items": [
@@ -282,7 +285,8 @@
           "colorSecondary": "#574D16"
         }
       }
-    ]
+    ],
+    "imgLink": "/avatars/avatar4.png"
   },
   {
     "items": [
@@ -314,7 +318,8 @@
       {
         "name": "accessories/neck/acs_neck_d_15"
       }
-    ]
+    ],
+    "imgLink": "/avatars/avatar5.png"
   },
   {
     "items": [
@@ -339,6 +344,7 @@
       {
         "name": "avatars/ears/avr_ears_c_01"
       }
-    ]
+    ],
+    "imgLink": "/avatars/avatar6.png"
   }
 ]

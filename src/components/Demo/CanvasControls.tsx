@@ -1,26 +1,30 @@
 import React from "react";
 import CameraOffSvg from "../../assets/svg/CameraOff";
 import CameraOnSvg from "../../assets/svg/CameraOn";
+import AvatarSwitcher from "./AvatarSwitcher";
 
 interface CanvasControlsProps {
-  handleAvatarSwitch: () => void;
+  handleAvatarSwitch: (index: number) => void;
   handleCameraClick: () => void;
   cameraOn: boolean;
+  presets: any[];
+  presetIndex: number;
 }
 
 function CanvasControls({
   handleAvatarSwitch,
   handleCameraClick,
   cameraOn,
+  presets,
+  presetIndex,
 }: CanvasControlsProps): JSX.Element {
   return (
     <div className="absolute top-0 left-0 h-[64px] bg-transparent w-full flex items-center px-4">
-      <button
-        className="bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded-full"
-        onClick={handleAvatarSwitch}
-      >
-        Switch Avatar
-      </button>
+      <AvatarSwitcher
+        handleAvatarSwitch={handleAvatarSwitch}
+        presets={presets}
+        presetIndex={presetIndex}
+      />
       <ul className="flex flex-1 justify-end items-center gap-12 text-face-blue uppercase text-xs">
         <button
           onClick={handleCameraClick}

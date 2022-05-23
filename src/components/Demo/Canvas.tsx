@@ -127,11 +127,11 @@ function Canvas() {
     });
   };
 
-  const handleAvatarSwitch = () => {
-    const updatingIndex = (presetIndex + 1) % avatarPresets.current.length;
-    console.log(`Updating to avatar preset ${updatingIndex}`);
-    // setspinner(true);
-    setPresetIndex(updatingIndex);
+  const handleAvatarSwitch = (index: number) => {
+    // const updatingIndex = (presetIndex + 1) % avatarPresets.current.length;
+    console.log(`Updating to avatar preset ${index}`);
+    setspinner(true);
+    setPresetIndex(index);
   };
 
   useEffect(() => {
@@ -140,7 +140,7 @@ function Canvas() {
       avatarRef.current
         ?.updateAvatarFromObject(presets[presetIndex])
         .then(() => {
-          // setspinner(false);
+          setspinner(false);
           console.log(`Updated to avatar preset ${presetIndex}`);
         });
     }
@@ -165,7 +165,7 @@ function Canvas() {
           <canvas ref={canvasRef} height="600" className="w-full h-full" />
           <video ref={videoElement} style={{ display: "none" }} />
           {spinner && (
-            <div className="absolute w-full h-full top-0 left-0  flex justify-center items-center">
+            <div className="absolute w-full h-full top-0 left-0  flex justify-center items-center bg-black opacity-75">
               <div className="text-white">Loading Model</div>
             </div>
           )}
@@ -175,6 +175,8 @@ function Canvas() {
               handleAvatarSwitch={handleAvatarSwitch}
               handleCameraClick={handleCameraClick}
               cameraOn={cameraOn}
+              presets={avatarPresets.current}
+              presetIndex={presetIndex}
             />
           )}
         </div>
