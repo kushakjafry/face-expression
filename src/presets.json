@@ -1,0 +1,344 @@
+[
+  {
+    "items": [
+      {
+        "name": "avatars/head/avr_head_a_06"
+      },
+      {
+        "name": "avatars/neck/avr_neck_a_01"
+      },
+      {
+        "name": "avatars/skin/avr_skin_a_01",
+        "properties": {
+          "materialVariant": "avr_skin_a_01_06"
+        }
+      },
+      {
+        "name": "avatars/lashes/avr_lashes_a_01",
+        "properties": {
+          "colorLashes": "#000000"
+        }
+      },
+      {
+        "name": "avatars/brows/avr_brows_a_02",
+        "properties": {
+          "colorBrows": "#221511"
+        }
+      },
+      {
+        "name": "avatars/eyes/avr_eyes_a_01",
+        "properties": {
+          "colorEyes": "#221511"
+        }
+      },
+      {
+        "name": "avatars/hair/avr_hair_a_05",
+        "properties": {
+          "colorHair": "#4E3729",
+          "colorHighlight": "#72503D"
+        }
+      },
+      {
+        "name": "accessories/head/acs_head_a_62",
+        "properties": {
+          "colorPrimary": "#333333"
+        }
+      },
+      {
+        "name": "accessories/eyes/acs_eyes_a_82",
+        "properties": {
+          "colorPrimary": "#C0C0C0",
+          "lensColor": "#000000"
+        }
+      },
+      {
+        "name": "accessories/neck/acs_neck_c_04",
+        "properties": {
+          "colorPrimary": "#2E2E33"
+        }
+      },
+      {
+        "name": "accessories/neck/acs_neck_a_02",
+        "properties": {
+          "colorPrimary": "#D75771"
+        }
+      },
+      {
+        "name": "accessories/mouth/acs_mouth_a_05"
+      },
+      {
+        "name": "accessories/hair/acs_hair_c_01"
+      },
+      {
+        "name": "accessories/hair/acs_hair_a_11"
+      },
+      {
+        "name": "accessories/ears/acs_ears_a_10"
+      },
+      {
+        "name": "accessories/mouth/acs_mouth_e_05"
+      },
+      {
+        "name": "avatars/skin/avr_skin_d_01",
+        "properties": {
+          "materialVariant": "avr_skin_d_01_02"
+        }
+      },
+      {
+        "name": "accessories/tongue/acs_tongue_a_01"
+      }
+    ]
+  },
+  {
+    "items": [
+      {
+        "name": "avatars/head/avr_head_b_01"
+      },
+      {
+        "name": "avatars/neck/avr_neck_b_01"
+      },
+      {
+        "name": "avatars/skin/avr_skin_b_01"
+      },
+      {
+        "name": "avatars/eyes/avr_eyes_c_01"
+      },
+      {
+        "name": "avatars/eyes/avr_eyes_b_04",
+        "properties": {
+          "colorEyes": "#221511"
+        }
+      },
+      {
+        "name": "accessories/teeth/acs_teeth_b_02"
+      },
+      {
+        "name": "avatars/hair/avr_hair_b_12",
+        "properties": {
+          "colorHair": "#00ffcc",
+          "colorHighlight": "#ff05ff"
+        }
+      },
+      {
+        "name": "accessories/neck/acs_neck_b_01"
+      },
+      {
+        "name": "accessories/neck/acs_neck_d_04"
+      },
+      {
+        "name": "accessories/mouth/acs_mouth_d_02"
+      },
+      {
+        "name": "accessories/ears/acs_ears_e_10"
+      }
+    ]
+  },
+  {
+    "items": [
+      {
+        "name": "avatars/head/avr_head_a_01"
+      },
+      {
+        "name": "avatars/neck/avr_neck_a_01"
+      },
+      {
+        "name": "avatars/skin/avr_skin_a_01",
+        "properties": {
+          "materialVariant": "avr_skin_a_01_01"
+        }
+      },
+      {
+        "name": "avatars/skin/avr_skin_g_01",
+        "properties": {
+          "materialVariant": "avr_skin_g_01_04"
+        }
+      },
+      {
+        "name": "avatars/lashes/avr_lashes_a_01",
+        "properties": {
+          "colorLashes": "#000000"
+        }
+      },
+      {
+        "name": "avatars/brows/avr_brows_a_05",
+        "properties": {
+          "colorBrows": "#221511"
+        }
+      },
+      {
+        "name": "avatars/eyes/avr_eyes_a_01",
+        "properties": {
+          "colorEyes": "#00ffcc"
+        }
+      },
+      {
+        "name": "avatars/hair/avr_hair_b_04",
+        "properties": {
+          "colorHair": "#4B1E0A",
+          "colorHighlight": "#FF3E95"
+        }
+      },
+      {
+        "name": "accessories/eyes/acs_eyes_e_01",
+        "properties": {
+          "colorPrimary": "#FF3E95"
+        }
+      },
+      {
+        "name": "accessories/face/acs_face_d_03"
+      },
+      {
+        "name": "accessories/mouth/acs_mouth_e_04"
+      },
+      {
+        "name": "accessories/neck/acs_neck_a_01"
+      },
+      {
+        "name": "accessories/face/acs_face_a_03"
+      },
+      {
+        "name": "accessories/teeth/acs_teeth_b_01"
+      },
+      {
+        "name": "accessories/ears/acs_ears_a_02",
+        "properties": {
+          "acs_ears_a_02_mat": "metal_silver_01"
+        }
+      },
+      {
+        "name": "accessories/hair/acs_hair_d_05",
+        "properties": {
+          "colorPrimary": "#FF3E95"
+        }
+      },
+      {
+        "name": "accessories/neck/acs_neck_c_04",
+        "properties": {
+          "colorPrimary": "#8ED7FB"
+        }
+      },
+      {
+        "name": "addons/add_b_04"
+      }
+    ]
+  },
+  {
+    "items": [
+      {
+        "name": "avatars/head/avr_head_a_02"
+      },
+      {
+        "name": "avatars/neck/avr_neck_a_02"
+      },
+      {
+        "name": "avatars/skin/avr_skin_a_01",
+        "properties": {
+          "materialVariant": "avr_skin_a_01_13"
+        }
+      },
+      {
+        "name": "avatars/lashes/avr_lashes_a_01",
+        "properties": {
+          "colorLashes": "#000000"
+        }
+      },
+      {
+        "name": "avatars/brows/avr_brows_a_12",
+        "properties": {
+          "colorBrows": "#221511"
+        }
+      },
+      {
+        "name": "avatars/eyes/avr_eyes_a_03",
+        "properties": {
+          "colorEyes": "#221511"
+        }
+      },
+      {
+        "name": "accessories/tongue/acs_tongue_a_01",
+        "properties": {
+          "acs_tongue_a_01_mat": "metal_steel_01"
+        }
+      },
+      {
+        "name": "avatars/hair/avr_hair_a_09",
+        "properties": {
+          "colorHair": "#231814",
+          "colorHighlight": "#cf725a"
+        }
+      },
+      {
+        "name": "accessories/ears/acs_ears_e_06"
+      },
+      {
+        "name": "accessories/neck/acs_neck_c_02",
+        "properties": {
+          "colorPrimary": "#F7F7F7"
+        }
+      },
+      {
+        "name": "accessories/neck/acs_neck_d_05",
+        "properties": {
+          "colorSecondary": "#574D16"
+        }
+      }
+    ]
+  },
+  {
+    "items": [
+      {
+        "name": "avatars/head/avr_head_b_02"
+      },
+      {
+        "name": "avatars/neck/avr_neck_a_02"
+      },
+      {
+        "name": "avatars/skin/avr_skin_b_02",
+        "properties": {
+          "materialVariant": "avr_skin_b_02_01"
+        }
+      },
+      {
+        "name": "avatars/eyes/avr_eyes_b_02"
+      },
+      {
+        "name": "avatars/hair/avr_hair_b_10",
+        "properties": {
+          "colorHair": "#231814",
+          "colorHighlight": "#514221"
+        }
+      },
+      {
+        "name": "accessories/neck/acs_neck_b_07"
+      },
+      {
+        "name": "accessories/neck/acs_neck_d_15"
+      }
+    ]
+  },
+  {
+    "items": [
+      {
+        "name": "avatars/head/avr_head_c_01"
+      },
+      {
+        "name": "avatars/body/avr_body_c_01"
+      },
+      {
+        "name": "avatars/skin/avr_skin_c_01",
+        "properties": {
+          "materialVariant": "avr_skin_c_01_01"
+        }
+      },
+      {
+        "name": "avatars/eyes/avr_eyes_b_04"
+      },
+      {
+        "name": "avatars/forehead/avr_forehead_a_04"
+      },
+      {
+        "name": "avatars/ears/avr_ears_c_01"
+      }
+    ]
+  }
+]
