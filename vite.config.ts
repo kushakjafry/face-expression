@@ -29,6 +29,10 @@ export default defineConfig({
           src: "./src/*.json",
           dest: ".",
         },
+        {
+          src: "./node_modules/three/examples/js/libs/basis",
+          dest: "js/libs",
+        },
       ],
     }),
   ],
