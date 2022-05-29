@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DropdownArrow from "../../assets/svg/DropdownArrow";
+import DropdownArrow from "../../../assets/svg/DropdownArrow";
 
 interface AvatarSwitcherProps {
   handleAvatarSwitch: (index: number) => void;

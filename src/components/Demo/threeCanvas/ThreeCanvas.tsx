@@ -6,19 +6,14 @@ import {
   ApplicationContext,
   FacemojiAPI,
   FaceTracker,
-  FaceTrackerResultDeserializer,
-  FaceTrackerResultSerializer,
-  FPS,
   Future,
-  Logger,
-  LogLevel,
   Nullable,
   Quaternion,
   ResourceFileSystem,
-  Vec2,
 } from "@0xalter/mocap4face";
-import { Vector3 } from "three";
 import ThreeCanvasControls from "./ThreeCanvasControls";
+import { getWorldCordinates } from "../../../utils/canvasUtils";
+import { faceRotationToBlendshapes } from "../../../utils/avatarUtils";
 
 const CanvasElements = lazy(() => import("./CanvasElements"));
 
@@ -31,7 +26,6 @@ function ThreeCanvas() {
   const [scene, setScene] = useState<any>(null);
   const [camera, setCamera] = useState<any>(null);
   const didMount = useRef(false);
-  const initialInfluencesRef = useRef<number[]>([]);
   const rectRef = useRef<HTMLDivElement | null>(null);
 
   const intialize = () => {
@@ -47,7 +41,6 @@ function ThreeCanvas() {
 
     const asyncTracker = FaceTracker.createVideoTracker(fs)
       .then((tracker) => {
-        console.log("tracking");
         const blendshapeNames = tracker.blendshapeNames
           .toArray()
           .concat(
@@ -56,27 +49,11 @@ function ThreeCanvas() {
             ).map((e) => e[0])
           )
           .sort();
-        console.log("here");
         return tracker;
       })
       .logError("Could Not start Recording");
     asyncTrackerRef.current = asyncTracker;
   };
-
-  function faceRotationToBlendshapes(
-    rotation: Quaternion
-  ): Array<[string, number]> {
-    let euler = rotation.toEuler();
-    let halfPi = Math.PI * 0.5;
-    return [
-      ["headLeft", Math.max(0, euler.y) / halfPi],
-      ["headRight", -Math.min(0, euler.y) / halfPi],
-      ["headUp", -Math.min(0, euler.x) / halfPi],
-      ["headDown", Math.max(0, euler.x) / halfPi],
-      ["headRollLeft", -Math.min(0, euler.z) / halfPi],
-      ["headRollRight", Math.max(0, euler.z) / halfPi],
-    ];
-  }
 
   const startVideo = () => {
     const video = videoRef.current!;
@@ -88,70 +65,50 @@ function ThreeCanvas() {
 
   const stopVideo = () => {
     const video = videoRef.current!;
-    const { morphTargetInfluences: influences } = head;
-    const initialInfluences = initialInfluencesRef.current;
-    for (let i = 0; i < initialInfluences.length; i++) {
-      influences[i] = initialInfluences[i];
-    }
     if (video.srcObject !== null) {
       (video.srcObject as MediaStream)?.getTracks().forEach((t) => t.stop());
       video.srcObject = null;
     }
   };
 
-  const getWorldCordinates = (X: number, Y: number) => {
-    const canvas = canvasRef.current!;
-    const canvasWidth = canvas.clientWidth;
-    const canvasHeight = canvas.clientHeight;
-    let vec = new Vector3(); // create once and reuse
-    let pos = new Vector3(); // create once and reuse
-    vec.set((X / canvasWidth) * 2 - 1, -(Y / canvasHeight) * 2 + 1, 0.5);
-    vec.unproject(camera);
-    vec.sub(camera.position).normalize();
-    var distance = -camera.position.z / vec.z;
-    pos.copy(camera.position).add(vec.multiplyScalar(distance));
-    return pos;
-  };
-
-  useEffect(() => {
-    if (head != null) {
-      track();
-    }
-  }, [head]);
-
   const track = () => {
     requestAnimationFrame(track);
     if (head == null) return;
+    // get coefficients present on head model
     const {
       morphTargetInfluences: influences,
       morphTargetDictionary: morphDict,
     } = head;
-    if (initialInfluencesRef.current.length === 0) {
-      initialInfluencesRef.current = [...influences];
-    }
     const tracker = asyncTrackerRef.current!.currentValue;
     if (!tracker || !videoRef.current) {
       return;
     }
 
+    // get last results from motion capture video.
     const lastResult = tracker.track(videoRef.current);
     if (lastResult == null) {
       return;
     }
 
+    // find the position of face in 2D and then convert it to 3D canvas world space
     const rect = lastResult.faceRectangle
       .flipY(lastResult.inputImageSize.y)
       .normalizeBy(lastResult.inputImageSize)
       .scale(videoRef.current!.clientWidth, videoRef.current!.clientHeight)
       .scaleAroundCenter(0.8, 0.8);
-    console.log(rect);
     const centerX = rect.x + rect.width / 2;
     const centerY = rect.y + rect.height / 2;
-    const worldPos = getWorldCordinates(centerX, centerY);
+    const worldPos = getWorldCordinates(
+      canvasRef.current!,
+      centerX,
+      centerY,
+      camera
+    );
     scene.position.setX(worldPos.x);
     scene.position.setY(worldPos.y);
     scene.position.setZ(0);
 
+    // update the values
     for (const [name, value] of lastResult!.blendshapes) {
       // @ts-ignore
       if (name in morphDict) {
@@ -172,6 +129,12 @@ function ThreeCanvas() {
   const handleCameraClick = () => {
     setCameraOn(!cameraOn);
   };
+
+  useEffect(() => {
+    if (head != null) {
+      track();
+    }
+  }, [head]);
 
   useEffect(() => {
     if (didMount.current) {

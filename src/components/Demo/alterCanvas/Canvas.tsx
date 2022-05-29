@@ -12,9 +12,9 @@ import {
   TrackerAvatarController,
   Try,
 } from "@0xalter/alter-core";
-import { resizeCanvas } from "../../utils/canvasUtils";
-import { IdleAnimationAvatarController } from "../../utils/avatarUtils";
-import { cameraStop } from "../../utils/cameraUtils";
+import { resizeCanvas } from "../../../utils/canvasUtils";
+import { IdleAnimationAvatarController } from "../../../utils/avatarUtils";
+import { cameraStop } from "../../../utils/cameraUtils";
 import CanvasControls from "./CanvasControls";
 
 function Canvas() {

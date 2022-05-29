@@ -24,3 +24,18 @@ export class IdleAnimationAvatarController implements AvatarController {
     );
   }
 }
+
+export function faceRotationToBlendshapes(
+  rotation: Quaternion
+): Array<[string, number]> {
+  let euler = rotation.toEuler();
+  let halfPi = Math.PI * 0.5;
+  return [
+    ["headLeft", Math.max(0, euler.y) / halfPi],
+    ["headRight", -Math.min(0, euler.y) / halfPi],
+    ["headUp", -Math.min(0, euler.x) / halfPi],
+    ["headDown", Math.max(0, euler.x) / halfPi],
+    ["headRollLeft", -Math.min(0, euler.z) / halfPi],
+    ["headRollRight", Math.max(0, euler.z) / halfPi],
+  ];
+}

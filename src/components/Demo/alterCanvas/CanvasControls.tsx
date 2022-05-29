@@ -1,6 +1,6 @@
 import React from "react";
-import CameraOffSvg from "../../assets/svg/CameraOff";
-import CameraOnSvg from "../../assets/svg/CameraOn";
+import CameraOffSvg from "../../../assets/svg/CameraOff";
+import CameraOnSvg from "../../../assets/svg/CameraOn";
 import AvatarSwitcher from "./AvatarSwitcher";
 
 interface CanvasControlsProps {
