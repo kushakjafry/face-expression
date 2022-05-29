@@ -21,6 +21,7 @@ function DemoApp() {
       </div> */}
       {/* {!threeJsModelMode && <Canvas />} */}
       {/* {threeJsModelMode && <ThreeCanvas />} */}
+      {/* <Canvas /> */}
       <ThreeCanvas />
     </section>
   );

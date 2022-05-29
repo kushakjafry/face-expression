@@ -17,13 +17,14 @@ import {
   ResourceFileSystem,
   Vec2,
 } from "@0xalter/mocap4face";
-import ThreeCanvasControls from "./ThreeCanvasControls";
 import { Vector3 } from "three";
+import ThreeCanvasControls from "./ThreeCanvasControls";
 
 const CanvasElements = lazy(() => import("./CanvasElements"));
 
 function ThreeCanvas() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [cameraOn, setCameraOn] = useState(false);
   const asyncTrackerRef = useRef<Future<Nullable<FaceTracker>> | null>(null);
   const [head, setHead] = useState<any>(null);
@@ -98,6 +99,20 @@ function ThreeCanvas() {
     }
   };
 
+  const getWorldCordinates = (X: number, Y: number) => {
+    const canvas = canvasRef.current!;
+    const canvasWidth = canvas.clientWidth;
+    const canvasHeight = canvas.clientHeight;
+    let vec = new Vector3(); // create once and reuse
+    let pos = new Vector3(); // create once and reuse
+    vec.set((X / canvasWidth) * 2 - 1, -(Y / canvasHeight) * 2 + 1, 0.5);
+    vec.unproject(camera);
+    vec.sub(camera.position).normalize();
+    var distance = -camera.position.z / vec.z;
+    pos.copy(camera.position).add(vec.multiplyScalar(distance));
+    return pos;
+  };
+
   useEffect(() => {
     if (head != null) {
       track();
@@ -124,31 +139,18 @@ function ThreeCanvas() {
       return;
     }
 
-    // const rect = lastResult.faceRectangle
-    //   .flipY(lastResult.inputImageSize.y)
-    //   .normalizeBy(lastResult.inputImageSize)
-    //   .scale(videoRef.current!.clientWidth, videoRef.current!.clientHeight)
-    //   .scaleAroundCenter(0.8, 0.8);
-    // let faceRectangleElement = rectRef.current!;
-    // faceRectangleElement.style.left = rect.x.toString() + "px";
-    // faceRectangleElement.style.top = rect.y.toString() + "px";
-    // faceRectangleElement.style.width = rect.width.toString() + "px";
-    // faceRectangleElement.style.height = rect.height.toString() + "px";
-
-    // const vector = new Vector3();
-    // const position = new Vector3();
-
-    // const canvasWidth = (rect.x - 633 / 2) / 633;
-    // const canvasHeight = (rect.x - 600 / 2) / 600;
-    // vector.set((rect.x / 633) * 2 - 1, -(rect.y / 600) * 2 + 1, 0.5);
-    // vector.unproject(camera);
-    // vector.sub(camera.position).normalize();
-    // let distance = -camera.position.z / vector.z;
-    // position.copy(camera.position).add(vector.multiplyScalar(distance));
-    // console.log(position, vector);
-    // scene.position.setX(position.x);
-    // scene.position.setY(position.y);
-    // scene.position.setZ(position.z);
+    const rect = lastResult.faceRectangle
+      .flipY(lastResult.inputImageSize.y)
+      .normalizeBy(lastResult.inputImageSize)
+      .scale(videoRef.current!.clientWidth, videoRef.current!.clientHeight)
+      .scaleAroundCenter(0.8, 0.8);
+    console.log(rect);
+    const centerX = rect.x + rect.width / 2;
+    const centerY = rect.y + rect.height / 2;
+    const worldPos = getWorldCordinates(centerX, centerY);
+    scene.position.setX(worldPos.x);
+    scene.position.setY(worldPos.y);
+    scene.position.setZ(0);
 
     for (const [name, value] of lastResult!.blendshapes) {
       // @ts-ignore
@@ -190,7 +192,10 @@ function ThreeCanvas() {
         <div className="hidden sm:flex w-1/12 h-full"></div>
         <div className="flex w-full sm:w-10/12 h-full items-center rounded-md  justify-center">
           <div className="h-full w-1/2 bg-gray-700 relative">
-            <Canvas orthographic camera={{ zoom: 100, position: [0, 0, 100] }}>
+            <Canvas
+              ref={canvasRef}
+              camera={{ zoom: 30, position: [0, 0, 200] }}
+            >
               <Suspense fallback={<Loader />}>
                 <CanvasElements
                   setHead={setHead}

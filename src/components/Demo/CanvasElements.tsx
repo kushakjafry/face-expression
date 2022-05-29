@@ -12,8 +12,6 @@ function CanvasElements({ setHead, setScene, setCamera }) {
   const { nodes, materials, scene } = useGLTF(url);
   const head = nodes.mesh_2;
   const { camera } = useThree();
-  let cameraRef: Ref<OrthographicCameraProps> | undefined;
-  cameraRef = useRef() as RefObject<OrthographicCameraProps>;
   // @ts-ignore
   const influences = head.morphTargetInfluences;
   useEffect(() => {
