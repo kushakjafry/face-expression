@@ -1,6 +1,7 @@
 # Welcome to 3D Avatar Application
 
 **Demo** : [3D Avatar Application](https://animated-queijadas-8df0b9.netlify.app/)
+
 3D Avatar application created using [**Alter-core**](https://github.com/facemoji/alter-core), [**mocap4face**](https://github.com/facemoji/mocap4face) and [**three.js**](https://github.com/mrdoob/three.js) sdk. It uses users **webcam** feed , or some **video** for **realtime facial motion capture** based on Facial Action Coding System(**FACS**). It uses **mocap4face** sdk for **motion capture**, the sdk generates **FACS-derived blendshape coefficients**. It uses three.js for rendering our models, (i.e .glb models). The app then uses the motion capture data and changes the face model coefficients.
 
 # Technologies Used
