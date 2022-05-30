@@ -70,7 +70,7 @@ A -- Using motion capture data animates model --> C
 Clone the repository:
 
 ```bash
-git clone https://github.com/kushakjafry/face-app.git
+git clone https://github.com/kushakjafry/face-expression.git
 ```
 
 Run the server -
