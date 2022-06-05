@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import KalidokitCanvas from "./kalidokitCanvas/KalidokitCanvas";
-// import Canvas from "./Canvas";
+import Canvas from "./alterCanvas/Canvas";
 import ThreeCanvas from "./threeCanvas/ThreeCanvas";
 
 function DemoApp() {

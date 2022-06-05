@@ -3,18 +3,18 @@ import { Face, Pose, Hand, Vector } from "kalidokit";
 import { Canvas } from "@react-three/fiber";
 import KalidokitCanvasElements from "./KalidokitCanvasElements";
 import { clamp, remap } from "kalidokit/dist/utils/helpers";
-const lerp = Vector.lerp;
-import {
-  FACEMESH_TESSELATION,
-  HAND_CONNECTIONS,
-  Holistic,
-  POSE_CONNECTIONS,
-} from "@mediapipe/holistic";
-import { Camera } from "@mediapipe/camera_utils";
+
+import * as mp from "@mediapipe/holistic";
+import * as cameraUtils from "@mediapipe/camera_utils";
 import { VRM, VRMSchema } from "@pixiv/three-vrm";
 import { Euler, Quaternion, Vector3 } from "three";
 import Loader from "../threeCanvas/Loader";
-import { drawConnectors, drawLandmarks } from "@mediapipe/drawing_utils";
+const lerp = Vector.lerp;
+const FACEMESH_TESSELATION = mp.FACEMESH_TESSELATION,
+  HAND_CONNECTIONS = mp.HAND_CONNECTIONS,
+  Holistic = mp.Holistic,
+  POSE_CONNECTIONS = mp.POSE_CONNECTIONS,
+  Camera = cameraUtils.Camera;
 
 function KalidokitCanvas() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -22,7 +22,7 @@ function KalidokitCanvas() {
   const canvas2Ref = useRef<HTMLCanvasElement | null>(null);
   const [VRM_1, setVRM] = useState<VRM | null>(null);
   const oldLookTarget = useRef(new Euler());
-  const holisticRef = useRef<Holistic | null>(null);
+  const holisticRef = useRef<typeof Holistic | null>(null);
 
   // const animate = async () => {
   //   requestAnimationFrame(animate);
@@ -298,10 +298,10 @@ function KalidokitCanvas() {
 
   const onResults = (results) => {
     animateVRM(VRM_1!, results);
-    drawResults(results);
+    // drawResults(results);
   };
 
-  const initializeHolistic = async (holistic: Holistic) => {
+  const initializeHolistic = async (holistic) => {
     await holistic.initialize();
     holisticRef.current! = holistic;
     const camera = new Camera(videoRef.current!, {
@@ -316,6 +316,7 @@ function KalidokitCanvas() {
 
   useEffect(() => {
     if (VRM_1) {
+      console.log(Holistic);
       const holistic = new Holistic({
         locateFile: (file) => {
           return `https://cdn.jsdelivr.net/npm/@mediapipe/holistic/${file}`;
@@ -336,55 +337,55 @@ function KalidokitCanvas() {
     }
   }, [VRM_1]);
 
-  const drawResults = (results) => {
-    const guideCanvas = canvas2Ref.current!;
-    const videoElement = videoRef.current!;
-    guideCanvas.width = videoElement.videoWidth;
-    guideCanvas.height = videoElement.videoHeight;
-    let canvasCtx = guideCanvas.getContext("2d");
-    canvasCtx!.save();
-    canvasCtx!.clearRect(0, 0, guideCanvas.width, guideCanvas.height);
-    // Use `Mediapipe` drawing functions
-    drawConnectors(canvasCtx!, results.poseLandmarks, POSE_CONNECTIONS, {
-      color: "#00cff7",
-      lineWidth: 4,
-    });
-    drawLandmarks(canvasCtx!, results.poseLandmarks, {
-      color: "#ff0364",
-      lineWidth: 2,
-    });
-    drawConnectors(canvasCtx!, results.faceLandmarks, FACEMESH_TESSELATION, {
-      color: "#C0C0C070",
-      lineWidth: 1,
-    });
-    if (results.faceLandmarks && results.faceLandmarks.length === 478) {
-      //draw pupils
-      drawLandmarks(
-        canvasCtx!,
-        [results.faceLandmarks[468], results.faceLandmarks[468 + 5]],
-        {
-          color: "#ffe603",
-          lineWidth: 2,
-        }
-      );
-    }
-    drawConnectors(canvasCtx!, results.leftHandLandmarks, HAND_CONNECTIONS, {
-      color: "#eb1064",
-      lineWidth: 5,
-    });
-    drawLandmarks(canvasCtx!, results.leftHandLandmarks, {
-      color: "#00cff7",
-      lineWidth: 2,
-    });
-    drawConnectors(canvasCtx!, results.rightHandLandmarks, HAND_CONNECTIONS, {
-      color: "#22c3e3",
-      lineWidth: 5,
-    });
-    drawLandmarks(canvasCtx!, results.rightHandLandmarks, {
-      color: "#ff0364",
-      lineWidth: 2,
-    });
-  };
+  // const drawResults = (results) => {
+  //   const guideCanvas = canvas2Ref.current!;
+  //   const videoElement = videoRef.current!;
+  //   guideCanvas.width = videoElement.videoWidth;
+  //   guideCanvas.height = videoElement.videoHeight;
+  //   let canvasCtx = guideCanvas.getContext("2d");
+  //   canvasCtx!.save();
+  //   canvasCtx!.clearRect(0, 0, guideCanvas.width, guideCanvas.height);
+  //   // Use `Mediapipe` drawing functions
+  //   drawConnectors(canvasCtx!, results.poseLandmarks, POSE_CONNECTIONS, {
+  //     color: "#00cff7",
+  //     lineWidth: 4,
+  //   });
+  //   drawLandmarks(canvasCtx!, results.poseLandmarks, {
+  //     color: "#ff0364",
+  //     lineWidth: 2,
+  //   });
+  //   drawConnectors(canvasCtx!, results.faceLandmarks, FACEMESH_TESSELATION, {
+  //     color: "#C0C0C070",
+  //     lineWidth: 1,
+  //   });
+  //   if (results.faceLandmarks && results.faceLandmarks.length === 478) {
+  //     //draw pupils
+  //     drawLandmarks(
+  //       canvasCtx!,
+  //       [results.faceLandmarks[468], results.faceLandmarks[468 + 5]],
+  //       {
+  //         color: "#ffe603",
+  //         lineWidth: 2,
+  //       }
+  //     );
+  //   }
+  //   drawConnectors(canvasCtx!, results.leftHandLandmarks, HAND_CONNECTIONS, {
+  //     color: "#eb1064",
+  //     lineWidth: 5,
+  //   });
+  //   drawLandmarks(canvasCtx!, results.leftHandLandmarks, {
+  //     color: "#00cff7",
+  //     lineWidth: 2,
+  //   });
+  //   drawConnectors(canvasCtx!, results.rightHandLandmarks, HAND_CONNECTIONS, {
+  //     color: "#22c3e3",
+  //     lineWidth: 5,
+  //   });
+  //   drawLandmarks(canvasCtx!, results.rightHandLandmarks, {
+  //     color: "#ff0364",
+  //     lineWidth: 2,
+  //   });
+  // };
 
   // const computeFrame = async () => {
   //   await holisticRef.current!.send({ image: videoRef.current! });
