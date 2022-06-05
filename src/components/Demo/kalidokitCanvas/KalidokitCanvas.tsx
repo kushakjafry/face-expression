@@ -405,9 +405,9 @@ function KalidokitCanvas() {
               </Suspense>
             </Canvas>
             {/* <ThreeCanvasControls
-          handleCameraClick={handleCameraClick}
-          cameraOn={cameraOn}
-        /> */}
+              handleCameraClick={handleCameraClick}
+              cameraOn={cameraOn}
+            /> */}
           </div>
           <div className="h-full w-1/2 relative">
             <video
